@@ -26,8 +26,9 @@ c.DockerSpawner.cmd = spawn_cmd
 
 c.DockerSpawner.allowed_images = {
    "Python"     : "brunoe/jupyter-base:develop",
-   "Java"   : "brunoe/jupyter-java-base:develop",
+   "Java"   : "brunoe/jupyter-java:develop",
    "PostgreSQL" : "brunoe/jupyter-db-pg:develop", 
+   "SciPy" : "jupyter/scipy-notebook:2023-04-17",
 }
 
 # Connect containers to this Docker network
@@ -45,6 +46,9 @@ c.DockerSpawner.notebook_dir = notebook_dir
 # Mount the real user's Docker volume on the host to the notebook user's
 # notebook directory in the container
 c.DockerSpawner.volumes = {"jupyterhub-user-{username}": notebook_dir}
+
+# Shutdown container when user logout
+c.JupyterHub.shutdown_on_logout = True
 
 # Remove containers once they are stopped
 c.DockerSpawner.remove = True
